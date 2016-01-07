@@ -1,28 +1,9 @@
-== README
+== Apollo - a Spotify jukebox where everyone is the DJ
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Apollo is a project I put together to work with Oauth/Spotify, React, and Ruby on Rails. The concept will allow a user to create a 'room' which can be accessed by others who visit the site. Guests to the room will be able to view the current playlist of the room, add songs from their own Spotify playlists, favorite songs from the room, and interact with the music currently playing in their room.
 
-Things you may want to cover:
+* Built with Ruby 2.2.2, on Rails 4.2.4
 
-* Ruby version
+* Requires spotify.yml, see spotify.yml.example for format
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* Currently in pre-alpha, do not expect expected behavior from this app
