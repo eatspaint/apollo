@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   root 'apollo#landing'
   get '/about', to: 'apollo#about'
-
   get '/auth/spotify/callback', to: 'users#spotify'
+  get '/rooms_index', to: 'rooms#rooms_index'
+
+  resources :rooms
 
   devise_for :users, controllers: { registrations: 'registrations' }
   # The priority is based upon order of creation: first created -> highest priority.

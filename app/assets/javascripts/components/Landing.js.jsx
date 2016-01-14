@@ -1,9 +1,11 @@
-"use strict";
 class Landing extends React.Component{
   render() {
     return(
-      <div>
-        <h1 className='grey-text text-darken-2'>Test</h1>
+      <div className='row'>
+        <div className='col s12'>
+          <h3>Landing Component</h3>
+          <p>needs rooms join/create and signup/signin</p>
+        </div>
       </div>
     )
   }
