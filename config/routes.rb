@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/about', to: 'apollo#about'
   get '/auth/spotify/callback', to: 'users#spotify'
   get '/rooms_index', to: 'rooms#rooms_index'
+  get '/playlist', to: 'playlists#show'
 
   resources :rooms
 

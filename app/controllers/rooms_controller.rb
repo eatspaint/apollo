@@ -8,10 +8,12 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
+    user = RSpotify::User.new(current_user.rspot)
+    @playlists = user.playlists
   end
 
   def room_show
-    @room = Room.find
+    @room = Room.find(params[:id])
   end
 
   def new

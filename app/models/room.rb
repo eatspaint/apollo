@@ -1,4 +1,5 @@
 class Room < ActiveRecord::Base
   belongs_to :user
+  has_many :jukeboxes
   has_many :playlists, through: :jukeboxes
 end
