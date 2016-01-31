@@ -49,9 +49,22 @@ class RoomContainer extends React.Component{
   }
   render(){
     return(
-      <div className='center'>
-        <h3>{ this.state.room.name }</h3>
-        { this.content() }
+      <div className='row'>
+        <div className='col s12'>
+          <div className='col s8'>
+            <div className='panel'>
+              <div className='panel-head'>
+                <h3>{ this.state.room.name }</h3>
+              </div>
+              <div className='panel-body'>
+                { this.content() }
+              </div>
+            </div>
+          </div>
+          <div className='col s4'>
+            <Search />
+          </div>
+        </div>
       </div>
     );
   }

@@ -11,4 +11,9 @@ class PlaylistsController < ApplicationController
   def edit
   end
 
+  def search
+    @results = RSpotify::Playlist.search(params[:playlist_query], limit: 50)
+    render json: @results
+  end
+
 end

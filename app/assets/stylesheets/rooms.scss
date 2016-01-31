@@ -1,3 +1,15 @@
-// Place all the styles related to the rooms controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.panel {
+  margin-top: 20px;
+  border: 1px solid #b3b3b3;
+}
+.panel-head,
+.panel-body {
+  padding: 10px 2.5%;
+}
+.panel-head {
+  background: #e6e6e6;
+  border-bottom: 1px solid #b3b3b3;
+}
+.panel-body {
+  background: #eeeeee;
+}

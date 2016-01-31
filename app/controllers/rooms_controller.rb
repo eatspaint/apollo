@@ -25,6 +25,10 @@ class RoomsController < ApplicationController
     if @room.save
       redirect_to '/rooms'
     else
+      messages = []
+      @room.errors.messages.each do |name, message|
+        flash[:validation] = message[0]
+      end
       render 'new'
     end
   end

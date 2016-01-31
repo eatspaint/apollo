@@ -1,9 +1,11 @@
-.center
-  %h3 Apollo runs in Rooms.
-  %p Create a room to allow other users to connect with your playlists.
-  .row
-    .col.s4.offset-s4
-      = form_for @room do |f|
-        = f.label :name
-        = f.text_field :name, required: true
-        = f.submit class: 'btn'
+.row
+  .col.s12
+    .panel
+      .panel-head
+        %h3 Apollo runs in Rooms.
+      .panel-body
+        %p Create a room to allow other users to connect with your playlists.
+        = form_for @room do |f|
+          = f.label :name
+          = f.text_field :name, required: true
+          = f.submit class: 'btn'

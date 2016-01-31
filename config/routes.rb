@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/auth/spotify/callback', to: 'users#spotify'
   get '/rooms_index', to: 'rooms#rooms_index'
   get '/playlist', to: 'playlists#show'
+  get '/playlists/search', to: 'playlists#search'
 
   resources :rooms
 

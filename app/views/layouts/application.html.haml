@@ -8,4 +8,7 @@
     = csrf_meta_tags
   %body
     = render 'layouts/navbar'
+    - flash.each do |flash|
+      %script
+        Materialize.toast("#{flash[1]}", 4000);
     = yield

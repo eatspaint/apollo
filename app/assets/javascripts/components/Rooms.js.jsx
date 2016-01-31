@@ -26,10 +26,16 @@ class Rooms extends React.Component{
     return(
       <div className='row'>
         <div className='col s12'>
-          <h3 className='center'>Your Rooms</h3>
-          <ul>
-            { this.rooms() }
-          </ul>  
+          <div className='panel'>
+            <div className='panel-head'>
+              <h3 className=''>Your Rooms</h3>
+            </div>
+            <div className='panel-body'>
+              <ul>
+                { this.rooms() }
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     )
