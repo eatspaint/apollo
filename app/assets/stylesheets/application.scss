@@ -17,3 +17,20 @@
 $primary-color: rgb(30, 2, 142) !default;
 $secondary-color: rgb(100, 95, 180) !default;
 @import 'materialize';
+
+@font-face {
+  font-family: "Nord Light";
+  src: url(/assets/NordLight.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Nord Medium";
+  src: url(/assets/NordMedium.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Nord Bold";
+  src: url(/assets/NordBold.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Nord Regular";
+  src: url(/assets/NordRegular.ttf) format("truetype");
+}

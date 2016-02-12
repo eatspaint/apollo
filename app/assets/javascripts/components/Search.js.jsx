@@ -22,7 +22,7 @@ class Search extends React.Component{
       let results = this.state.searchResults.map( playlist => {
         let key = 'playlist' + playlist.id;
         return(
-          <Playlist key={key} {...playlist}/>
+          <Playlist key={key} imgSize={2} {...playlist}/>
         );
       })
       return( results )

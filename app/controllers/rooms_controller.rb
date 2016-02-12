@@ -9,7 +9,7 @@ class RoomsController < ApplicationController
   def show
     @room = Room.find(params[:id])
     user = RSpotify::User.new(current_user.rspot)
-    @playlists = user.playlists
+    @playlists = user.playlists(limit: 50)
   end
 
   def room_show
@@ -34,6 +34,11 @@ class RoomsController < ApplicationController
   end
 
   def edit
+  end
+
+  def destroy
+    Room.find(params[:id]).destroy
+    head :ok
   end
 
   private

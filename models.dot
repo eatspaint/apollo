@@ -1,0 +1,11 @@
+digraph models_diagram {
+	graph[overlap=false, splines=true, bgcolor="none"]
+	"Jukebox" [shape=Mrecord, label="{Jukebox|id :integer\lname :character varying\lroom_id :integer\lplaylist_id :integer\lcreated_at :timestamp without time zone\lupdated_at :timestamp without time zone\l}"]
+	"Playlist" [shape=Mrecord, label="{Playlist|id :integer\lname :character varying\llist :text\luser_id :integer\lcreated_at :timestamp without time zone\lupdated_at :timestamp without time zone\l}"]
+	"Room" [shape=Mrecord, label="{Room|id :integer\lname :character varying\lstatus :character varying\luser_id :integer\lcreated_at :timestamp without time zone\lupdated_at :timestamp without time zone\l}"]
+	"User" [shape=Mrecord, label="{User|id :integer\lemail :character varying\lencrypted_password :character varying\lreset_password_token :character varying\lreset_password_sent_at :timestamp without time zone\lremember_created_at :timestamp without time zone\lsign_in_count :integer\lcurrent_sign_in_at :timestamp without time zone\llast_sign_in_at :timestamp without time zone\lcurrent_sign_in_ip :inet\llast_sign_in_ip :inet\lcreated_at :timestamp without time zone\lupdated_at :timestamp without time zone\lfirst_name :character varying\llast_name :character varying\lrspot :text\l}"]
+	"Playlist" -> "Jukebox" [arrowtail=odot, arrowhead=crow, dir=both color="#5F538A"]
+	"Playlist" -> "Room" [arrowtail=crow, arrowhead=crow, dir=both color="#364608"]
+	"Room" -> "Jukebox" [arrowtail=odot, arrowhead=crow, dir=both color="#35FCBA"]
+	"User" -> "Room" [arrowtail=odot, arrowhead=crow, dir=both color="#DD30BB"]
+}

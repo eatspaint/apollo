@@ -2,8 +2,13 @@ class Rooms extends React.Component{
   constructor(props){
     super(props);
     this.state = { rooms: [] };
+    this.refreshRooms = this.refreshRooms.bind(this);
+    this.newRoom = this.newRoom.bind(this);
   }
   componentDidMount(){
+    this.refreshRooms();
+  }
+  refreshRooms(){
     $.ajax({
       url: '/rooms_index',
       type: 'GET'
@@ -11,13 +16,23 @@ class Rooms extends React.Component{
       this.setState({ rooms: data.rooms });
     });
   }
+  newRoom(){
+    $.ajax({
+      url: '/rooms',
+      type: 'POST',
+      data: { room: { name: this.refs.room_name.value }}
+    }).success( data => {
+      this.refs.room_name.value = '';
+      this.refreshRooms();
+    })
+  }
   rooms(){
     if(this.state.rooms.length == 0){
       return(<p>You currently have no rooms</p>);
     } else {
       let yourRooms = this.state.rooms.map( room => {
         let key = `room-${room.id}`;
-        return(<Room key={key} {...room} />)
+        return(<Room key={key} {...room} refreshRooms={this.refreshRooms}/>)
       });
       return( yourRooms )
     }
@@ -25,7 +40,7 @@ class Rooms extends React.Component{
   render(){
     return(
       <div className='row'>
-        <div className='col s12'>
+        <div className='col s6'>
           <div className='panel'>
             <div className='panel-head'>
               <h3 className=''>Your Rooms</h3>
@@ -34,6 +49,18 @@ class Rooms extends React.Component{
               <ul>
                 { this.rooms() }
               </ul>
+            </div>
+          </div>
+        </div>
+        <div className='col s6'>
+          <div className='panel'>
+            <div className='panel-head'>
+              <h3 className=''>New Room</h3>
+            </div>
+            <div className='panel-body'>
+              <p>Create a room to allow other users to connect with your playlists.</p>
+              <input ref='room_name'></input>
+              <a className='btn' onClick={this.newRoom}>Create Room</a>
             </div>
           </div>
         </div>

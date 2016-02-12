@@ -9,7 +9,7 @@ gem 'devise'
 gem 'rspotify'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.4'
+gem 'rails', '4.2.5'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -45,6 +45,7 @@ group :development, :test do
   gem 'pry'
   gem 'byebug'
   gem 'awesome_print'
+  gem 'railroady'
 end
 
 group :development do

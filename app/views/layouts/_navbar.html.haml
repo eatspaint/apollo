@@ -1,19 +1,20 @@
-%ul#dropdown.dropdown-content
-  %li
-    = link_to 'Find', rooms_path
-  %li
-    = link_to 'Create', new_room_path
-%nav
+-# %ul#dropdown.dropdown-content
+-#   %li
+-#     = link_to 'Find', rooms_path
+-#   %li
+-#     = link_to 'Create', new_room_path
+%nav.custom-nav
   .nav-wrapper
-    %a.brand-logo.center logo
-    %ul#nav-mobile.left.hide-on-med-and-down
+    .brand-logo
+      = link_to image_tag('apollo_logo_by_large.png'), root_path, class: 'logo'
+    %ul#nav-mobile.right.hide-on-med-and-down
       -if current_user
         -# %li
         -#   = link_to 'Sign in with Spotify', '/auth/spotify'
         %li
           = link_to 'Log Out', destroy_user_session_path, method: 'delete'
         %li
-          %a.dropdown-button{data: {activates: 'dropdown'}} Rooms
+          = link_to 'Rooms', rooms_path
       -else
         %li
           = link_to 'Login', new_user_session_path

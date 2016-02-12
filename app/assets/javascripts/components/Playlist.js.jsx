@@ -9,11 +9,12 @@ class Playlist extends React.Component{
     }
   }
   render(){
-
+    let imgCols = 's' + this.props.imgSize;
+    let textCols = 's' + (12 - this.props.imgSize);
     return(
       <div className='col s12 result-'>
-        <img className='col s2' src={this.imageUrl()}></img>
-        <p className='col s10'>{this.props.name}</p>
+        <img className={'col ' + imgCols} src={this.imageUrl()}></img>
+        <p className={'col ' + textCols}>{this.props.name}</p>
       </div>
     )
   }

@@ -10,7 +10,11 @@ class RoomContainer extends React.Component{
       type: 'GET',
       data: { user: this.props.user.id, playlist: id }
     }).success( data => {
-      this.setState({ playlist: data, hasPlaylist: true});
+      if(data.error){
+        window.location.href = '/rooms/' + this.props.room.id;
+      }else{
+        this.setState({ playlist: data, hasPlaylist: true});
+      }
     });
   }
   content(){
@@ -19,13 +23,16 @@ class RoomContainer extends React.Component{
         let key = `playlist-${playlist.id}`;
         return(
           <li key={key} onClick={this.playlistClick.bind(this, playlist.id)}>
-            { playlist.name }
-          </li>)
+            <Playlist imgSize={1} {...playlist} />
+          </li>
+        )
       });
       return(
-        <div>
+        <div className='row'>
           <p>Please add a playlist or create a new one!</p>
-          <ul>{ playlists }</ul>
+          <ul>
+            { playlists }
+          </ul>
         </div>
       )
     } else {
