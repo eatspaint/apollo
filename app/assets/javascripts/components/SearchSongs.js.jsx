@@ -1,15 +1,15 @@
-class Search extends React.Component{
+class SearchSongs extends React.Component{
   constructor(props){
     super(props);
     this.state = { results: [] };
     this.search = this.search.bind(this);
   }
   search(){
-    if(this.refs.playlist_query.value.length >= 3){
+    if(this.refs.song_query.value.length >= 3){
       $.ajax({
-        url: '/playlists/search',
+        url: '/songs/search',
         type: 'GET',
-        data: { playlist_query: this.refs.playlist_query.value }
+        data: { song_query: this.refs.song_query.value }
       }).success( data => {
         this.setState({ searchResults: data })
       });
@@ -19,16 +19,20 @@ class Search extends React.Component{
   }
   results(){
     if(this.state.searchResults){
-      let results = this.state.searchResults.map( playlist => {
-        let key = 'playlist' + playlist.id;
+      let results = this.state.searchResults.map( song => {
+        let key = 'song' + song.id;
         return(
-          <Playlist key={key} imgSize={2} {...playlist}/>
+          <Song key={key}
+                addSong={this.props.addSong}
+                room={this.props.room}
+                playlist={this.props.playlist}
+                {...song}/>
         );
       })
       return( results )
     } else {
       return(
-        <p>Enter the name of a playlist above to search</p>
+        <p>Enter the name of a song above to search</p>
       )
     }
   }
@@ -36,10 +40,10 @@ class Search extends React.Component{
     return(
       <div className='panel'>
         <div className='panel-head'>
-          <h3>Search</h3>
+          <h3>Add Songs</h3>
         </div>
         <div className='panel-body'>
-          <input placeholder='Search playlists' ref='playlist_query' onChange={this.search}></input>
+          <input placeholder='Search songs' ref='song_query' onChange={this.search}></input>
           <div className='row'>
             { this.results() }
           </div>

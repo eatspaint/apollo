@@ -5,6 +5,13 @@ Rails.application.routes.draw do
   get '/rooms_index', to: 'rooms#rooms_index'
   get '/playlist', to: 'playlists#show'
   get '/playlists/search', to: 'playlists#search'
+  get '/songs/search', to: 'playlists#song_search'
+
+  put '/playlist', to: 'playlists#add_song'
+
+  post '/playlists', to: 'playlists#create'
+
+  delete '/remove_playlist', to: 'rooms#remove_playlist'
 
   resources :rooms
 

@@ -55,12 +55,12 @@ class Rooms extends React.Component{
         <div className='col s6'>
           <div className='panel'>
             <div className='panel-head'>
-              <h3 className=''>New Room</h3>
+              <h3 className=''>Create a Room</h3>
             </div>
             <div className='panel-body'>
-              <p>Create a room to allow other users to connect with your playlists.</p>
+              <p>Setting up a room allows other users to connect with your playlists.</p>
               <input ref='room_name'></input>
-              <a className='btn' onClick={this.newRoom}>Create Room</a>
+              <a className='btn' onClick={this.newRoom}>Create</a>
             </div>
           </div>
         </div>

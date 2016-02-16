@@ -1,1 +1,4 @@
-= react_component 'RoomContainer', {room: @room, playlists: @playlists, user: current_user}
+- if @playlist
+  = react_component 'RoomContainer', {room: @room, playlists: @playlists, user: current_user, hasPlaylist: true, playlist: @playlist}
+- else
+  = react_component 'RoomContainer', {room: @room, playlists: @playlists, user: current_user}

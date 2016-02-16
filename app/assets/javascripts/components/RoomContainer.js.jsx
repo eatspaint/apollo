@@ -1,14 +1,20 @@
 class RoomContainer extends React.Component{
   constructor(props){
     super(props);
-    this.state = { room: this.props.room, playlists: this.props.playlists, hasPlaylist: false };
+    if(this.props.playlist){
+      this.state = { room: this.props.room, playlists: this.props.playlists, hasPlaylist: this.props.hasPlaylist, playlist: this.props.playlist };
+    }else{
+      this.state = { room: this.props.room, playlists: this.props.playlists, hasPlaylist: this.props.hasPlaylist };
+    }
+    this.removePlaylist = this.removePlaylist.bind(this);
+    this.playlistClick = this.playlistClick.bind(this);
   }
   playlistClick(playlistId){
     let id = playlistId
     $.ajax({
       url: '/playlist',
       type: 'GET',
-      data: { user: this.props.user.id, playlist: id }
+      data: { user: this.props.user.id, playlist: id, room_id: this.props.room.id }
     }).success( data => {
       if(data.error){
         window.location.href = '/rooms/' + this.props.room.id;
@@ -16,6 +22,28 @@ class RoomContainer extends React.Component{
         this.setState({ playlist: data, hasPlaylist: true});
       }
     });
+  }
+  removePlaylist(){
+    $.ajax({
+      url: '/remove_playlist',
+      type: 'DELETE',
+      data: { room_id: this.state.room.id }
+    }).success( data => {
+      this.setState({ playlist: null, hasPlaylist: false})
+    })
+  }
+  addSong(){
+    $.ajax({
+      url: '/playlist',
+      type: 'PUT',
+      data: { song_id: this.props.id, room: this.props.room, playlist: this.props.playlist }
+    }).success( data => {
+      if(data.error){
+        window.location.href = '/rooms/' + this.props.room.id;
+      } else {
+        this.setState({ playlist: data });
+      }
+    })
   }
   content(){
     if( !this.state.hasPlaylist ){
@@ -49,8 +77,25 @@ class RoomContainer extends React.Component{
         <div>
           <p>Now Playing: {this.state.playlist.name}</p>
           <iframe src={ player } width="300" height="80" frameBorder="0" allowTransparency="true"></iframe>
+          <br />
+          <a className='pointer' onClick={this.removePlaylist}>Change Playlist</a>
           <ul>{ tracks }</ul>
         </div>
+      )
+    }
+  }
+  sidebar(){
+    if(this.state.hasPlaylist){
+      return(
+        <SearchSongs addSong={this.addSong}
+                   room={this.props.room}
+                   playlist={this.state.playlist}/>
+      )
+    } else {
+      return(
+        <NewPlaylist playlistClick={this.playlistClick}
+                     user={this.props.user}
+                     room={this.props.room}/>
       )
     }
   }
@@ -69,7 +114,7 @@ class RoomContainer extends React.Component{
             </div>
           </div>
           <div className='col s4'>
-            <Search />
+            { this.sidebar() }
           </div>
         </div>
       </div>
