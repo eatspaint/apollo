@@ -41,8 +41,18 @@ class RoomContainer extends React.Component{
       if(data.error){
         window.location.href = '/rooms/' + this.props.room.id;
       } else {
+        // window.location.href = '/rooms/' + this.props.room.id;
         this.setState({ playlist: data });
       }
+    })
+  }
+  removeSong(track_id){
+    $.ajax({
+      url: '/remove_track',
+      type: 'PUT',
+      data: { track_id: track_id, room: this.props.room, playlist: this.state.playlist }
+    }).success( data => {
+      this.setState({ playlist: data });
     })
   }
   content(){
@@ -69,6 +79,7 @@ class RoomContainer extends React.Component{
         return(
           <li key={key}>
             { track.name } - { track.artists[0].name }
+            <span onClick={this.removeSong.bind(this, track.id)}>&nbsp;[X]</span>
           </li>
         )
       })

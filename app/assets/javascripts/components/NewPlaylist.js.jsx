@@ -3,7 +3,8 @@ class NewPlaylist extends React.Component{
     super(props);
     this.newPlaylist = this.newPlaylist.bind(this);
   }
-  newPlaylist(){
+  newPlaylist(e){
+    e.preventDefault();
     $.ajax({
       url: '/playlists',
       type: 'POST',
@@ -20,8 +21,10 @@ class NewPlaylist extends React.Component{
         </div>
         <div className='panel-body'>
           <p>Build a new playlist to start from scratch.</p>
-          <input ref='playlist_name'></input>
-          <a className='btn' onClick={this.newPlaylist}>Create</a>
+          <form onSubmit={this.newPlaylist}>
+            <input ref='playlist_name'></input>
+            <button className='btn'>Create</button>
+          </form>
         </div>
       </div>
     )

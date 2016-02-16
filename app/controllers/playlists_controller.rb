@@ -15,7 +15,7 @@ class PlaylistsController < ApplicationController
   def create
     user = RSpotify::User.new(current_user.rspot)
     playlist = user.create_playlist!(params[:playlist_name])
-    render json: playlist 
+    render json: playlist
   end
 
   def search
@@ -28,12 +28,21 @@ class PlaylistsController < ApplicationController
     render json: @results
   end
 
-  def add_song
+  def add_track
     track = RSpotify::Track.find(params[:song_id])
     owner = Room.find(params[:room][:id]).user
     owner_rspot = RSpotify::User.new(owner.rspot)
     playlist = RSpotify::Playlist.find(owner_rspot.id, params[:playlist][:id])
     playlist.add_tracks!([track])
+    render json: playlist
+  end
+
+  def remove_track
+    track = RSpotify::Track.find(params[:track_id])
+    owner = Room.find(params[:room][:id]).user
+    owner_rspot = RSpotify::User.new(owner.rspot)
+    playlist = RSpotify::Playlist.find(owner_rspot.id, params[:playlist][:id])
+    playlist.remove_tracks!([track])
     render json: playlist
   end
 

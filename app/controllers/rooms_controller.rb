@@ -15,6 +15,16 @@ class RoomsController < ApplicationController
     end
   end
 
+  def find_room
+    room = Room.find_by(name: params[:room_name])
+    if room
+      render json: room
+    else
+      flash[:error] = 'A room with that name could not be found. (Rooms are case sensitive.)'
+      render json: {error: flash}
+    end
+  end
+
   def room_show
     @room = Room.find(params[:id])
   end
@@ -26,13 +36,13 @@ class RoomsController < ApplicationController
   def create
     @room = current_user.rooms.create(room_params)
     if @room.save
-      redirect_to '/rooms'
+      head :ok
     else
       messages = []
       @room.errors.messages.each do |name, message|
         flash[:validation] = message[0]
       end
-      render 'new'
+      render json: {error: messages}
     end
   end
 

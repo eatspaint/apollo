@@ -16,14 +16,19 @@ class Rooms extends React.Component{
       this.setState({ rooms: data.rooms });
     });
   }
-  newRoom(){
+  newRoom(e){
+    e.preventDefault();
     $.ajax({
       url: '/rooms',
       type: 'POST',
       data: { room: { name: this.refs.room_name.value }}
     }).success( data => {
-      this.refs.room_name.value = '';
-      this.refreshRooms();
+      if(data.error){
+        window.location.href = '/rooms'
+      } else {
+        this.refs.room_name.value = '';
+        this.refreshRooms();
+      }
     })
   }
   rooms(){
@@ -59,8 +64,10 @@ class Rooms extends React.Component{
             </div>
             <div className='panel-body'>
               <p>Setting up a room allows other users to connect with your playlists.</p>
-              <input ref='room_name'></input>
-              <a className='btn' onClick={this.newRoom}>Create</a>
+              <form onSubmit={this.newRoom}>
+                <input ref='room_name'></input>
+                <button className='btn'>Create</button>
+              </form>
             </div>
           </div>
         </div>
