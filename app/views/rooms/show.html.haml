@@ -1,4 +1,6 @@
-- if @playlist
+- if @playlist && current_user == nil
+  = react_component 'RoomContainer', {room: @room, user: @room.user, hasPlaylist: true, playlist: @playlist, guest: true}
+- elsif @playlist
   = react_component 'RoomContainer', {room: @room, playlists: @playlists, user: current_user, hasPlaylist: true, playlist: @playlist}
 - else
   = react_component 'RoomContainer', {room: @room, playlists: @playlists, user: current_user}

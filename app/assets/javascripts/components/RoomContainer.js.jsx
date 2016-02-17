@@ -8,6 +8,7 @@ class RoomContainer extends React.Component{
     }
     this.removePlaylist = this.removePlaylist.bind(this);
     this.playlistClick = this.playlistClick.bind(this);
+    this.updateCheck = this.updateCheck.bind(this);
   }
   playlistClick(playlistId){
     let id = playlistId
@@ -76,12 +77,20 @@ class RoomContainer extends React.Component{
     } else {
       let tracks = this.state.playlist.tracks_cache.map( track => {
         let key = `track-${track.id}`;
-        return(
-          <li key={key}>
-            { track.name } - { track.artists[0].name }
-            <span onClick={this.removeSong.bind(this, track.id)}>&nbsp;[X]</span>
-          </li>
-        )
+        if(this.props.guest || (this.props.user.id != this.props.room.user_id)){
+          return(
+            <li key={key}>
+              { track.name } - { track.artists[0].name }
+            </li>
+          )
+        } else {
+          return(
+            <li key={key}>
+              { track.name } - { track.artists[0].name }
+              <span className='pointer' onClick={this.removeSong.bind(this, track.id)}>&nbsp;[X]</span>
+            </li>
+          )
+        }
       })
       let player = "https://embed.spotify.com/?uri=" + this.state.playlist.uri;
       return(
@@ -99,8 +108,8 @@ class RoomContainer extends React.Component{
     if(this.state.hasPlaylist){
       return(
         <SearchSongs addSong={this.addSong}
-                   room={this.props.room}
-                   playlist={this.state.playlist}/>
+                     room={this.props.room}
+                     playlist={this.state.playlist}/>
       )
     } else {
       return(
@@ -110,7 +119,24 @@ class RoomContainer extends React.Component{
       )
     }
   }
+  updateCheck(){
+    check_against = this.state.playlist;
+    self = this;
+    $.ajax({
+      url: '/playlist',
+      type: 'GET',
+      data: { user: this.props.user.id, playlist: this.state.playlist.id, room_id: this.props.room.id }
+    }).success( data => {
+      if(data.total != check_against.total){
+        console.log('playlist has changed');
+        self.setState({ playlist: data });
+      }
+    })
+  }
   render(){
+    if(this.state.hasPlaylist){
+      setInterval(this.updateCheck, 5000);
+    }
     return(
       <div className='row'>
         <div className='col s12'>

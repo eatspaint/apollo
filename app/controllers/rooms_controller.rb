@@ -8,10 +8,15 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(params[:id])
-    user = RSpotify::User.new(current_user.rspot)
-    @playlists = user.playlists(limit: 50)
-    if @room.playlists.any?
-      @playlist = RSpotify::Playlist.find(user.id, @room.playlists.first.rspot_id)
+    @owner = RSpotify::User.new(@room.user.rspot)
+    if current_user
+      user = RSpotify::User.new(current_user.rspot)
+      @playlists = user.playlists(limit: 50)
+      if @room.playlists.any?
+        @playlist = RSpotify::Playlist.find(@owner.id, @room.playlists.first.rspot_id)
+      end
+    else
+      @playlist = RSpotify::Playlist.find(@owner.id, @room.playlists.first.rspot_id)
     end
   end
 

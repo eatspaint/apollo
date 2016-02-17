@@ -5,9 +5,9 @@
 -#     = link_to 'Create', new_room_path
 %nav.custom-nav
   .nav-wrapper
-    .brand-logo
+    .brand-logo.left
       = link_to image_tag('apollo_logo_by_large.png'), root_path, class: 'logo'
-    %ul#nav-mobile.right.hide-on-med-and-down
+    %ul#nav-mobile.right
       -if current_user
         -# %li
         -#   = link_to 'Sign in with Spotify', '/auth/spotify'

@@ -4,7 +4,9 @@ class PlaylistsController < ApplicationController
     begin
       @playlist = RSpotify::Playlist.find(user_id, params[:playlist])
       room = Room.find(params[:room_id])
-      room.playlists.create({user_id: user_id, rspot_id: @playlist.id})
+      unless room.playlists.any?
+        room.playlists.create({user_id: user_id, rspot_id: @playlist.id})
+      end
       render json: @playlist
     rescue => e
       flash[:error] = "Apollo only works with playlists you own."
