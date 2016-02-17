@@ -1,5 +1,5 @@
 body {
-  background-color: rgba(255, 219, 165, 0.3);
+  background-color: #181818;
   // background-image: linear-gradient(0deg, rgba(234,253,255,0.65) 0%, #D2FCFF 100%);
 }
 .pointer {
@@ -8,15 +8,18 @@ body {
 .full-width {
   width: 100%;
 }
+a {
+  color: #CB1C75 !important;
+}
 .landing-header {
-  background-image: linear-gradient(225deg, rgba(234,253,255,0.50) 0%, #D2FCFF 100%);
+  background-image: linear-gradient(rgba(217,217,217,0.20) 0%, #181818 100%);
   height: 350px;
   margin: 0;
 }
 .landing-welcome{
   font-family: 'Nord Regular';
   font-size: 74.8px;
-  color: #8162FF;
+  color: #CB1C75;
   text-shadow: 0px 2px 4px rgba(20,48,51,0.48);
   margin: 0;
   margin-bottom: -27px;
@@ -24,7 +27,7 @@ body {
 .landing-tagline {
   font-family: 'Nord Medium';
   font-size: 36px;
-  color: #8162FF;
+  color: #CB1C75;
   line-height: 43px;
   text-shadow: 0px 2px 4px rgba(20,48,51,0.48);
   margin-top: 15px;
@@ -32,7 +35,7 @@ body {
 .yellow-hr {
   height: 5px;
   margin: 0 auto;
-  background: #FFC062;
+  background: #EBEBEB;
   box-shadow: 0px 2px 4px 0px rgba(20,48,51,0.48);
   border-radius: 100px;
 }

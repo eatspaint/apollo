@@ -79,29 +79,62 @@ class RoomContainer extends React.Component{
         let key = `track-${track.id}`;
         if(this.props.guest || (this.props.user.id != this.props.room.user_id)){
           return(
-            <li key={key}>
-              { track.name } - { track.artists[0].name }
-            </li>
+            <tr key={key}>
+              <td>{ track.name }</td>
+              <td>{ track.artists[0].name }</td>
+            </tr>
           )
         } else {
           return(
-            <li key={key}>
-              { track.name } - { track.artists[0].name }
-              <span className='pointer' onClick={this.removeSong.bind(this, track.id)}>&nbsp;[X]</span>
-            </li>
+            <tr key={key}>
+              <td>{ track.name }</td>
+              <td>{ track.artists[0].name }</td>
+              <td className='pointer' onClick={this.removeSong.bind(this, track.id)}>&nbsp;[X]</td>
+            </tr>
           )
         }
       })
       let player = "https://embed.spotify.com/?uri=" + this.state.playlist.uri;
-      return(
-        <div>
-          <p>Now Playing: {this.state.playlist.name}</p>
-          <iframe src={ player } width="300" height="80" frameBorder="0" allowTransparency="true"></iframe>
-          <br />
-          <a className='pointer' onClick={this.removePlaylist}>Change Playlist</a>
-          <ul>{ tracks }</ul>
-        </div>
-      )
+      if(this.props.guest || (this.props.user.id != this.props.room.user_id)){
+        return(
+          <div>
+            <p>Current Playlist: {this.state.playlist.name}</p>
+            <iframe src={ player } width="300" height="80" frameBorder="0" allowTransparency="true"></iframe>
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Artist</th>
+                </tr>
+              </thead>
+              <tbody>
+                { tracks }
+              </tbody>
+            </table>
+          </div>
+        )
+      } else {
+        return(
+          <div>
+            <p>Current Playlist: {this.state.playlist.name}</p>
+            <iframe src={ player } width="300" height="80" frameBorder="0" allowTransparency="true"></iframe>
+            <br />
+            <a className='pointer' onClick={this.removePlaylist}>Change Playlist</a>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Artist</th>
+                    <th>Delete</th>
+                  </tr>  
+                </thead>
+                <tbody>
+                  { tracks }
+                </tbody>
+              </table>
+          </div>
+        )
+      }
     }
   }
   sidebar(){

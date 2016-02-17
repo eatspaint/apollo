@@ -36,11 +36,12 @@ class Landing extends React.Component{
               <div className='panel-body'>
                 <form onSubmit={this.findRoom}>
                   <div className='row'>
-                    <div className='col s10'>
+                    <div className=''>
                       <input ref='room_name'/>
                     </div>
-                    <div className='col s2'>
-                      <button className='btn' type='submit'>Find</button>
+                    <br />
+                    <div className='center-align'>
+                      <button className='btn' type='submit'>Enter</button>
                     </div>
                   </div>
                 </form>
