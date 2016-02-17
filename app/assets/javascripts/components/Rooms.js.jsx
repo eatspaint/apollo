@@ -39,7 +39,13 @@ class Rooms extends React.Component{
         let key = `room-${room.id}`;
         return(<Room key={key} {...room} refreshRooms={this.refreshRooms}/>)
       });
-      return( yourRooms )
+      return(
+        <table>
+          <tbody>
+            {yourRooms}
+          </tbody>
+        </table>
+      )
     }
   }
   render(){
@@ -51,9 +57,7 @@ class Rooms extends React.Component{
               <h3 className=''>Your Rooms</h3>
             </div>
             <div className='panel-body'>
-              <ul>
-                { this.rooms() }
-              </ul>
+              { this.rooms() }
             </div>
           </div>
         </div>

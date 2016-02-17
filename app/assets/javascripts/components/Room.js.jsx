@@ -14,10 +14,10 @@ class Room extends React.Component{
   render(){
     let url = `/rooms/${this.props.id}`;
     return(
-      <li>
-        <a href={url}>{this.props.name}</a>
-        <span onClick={ this.deleteRoom.bind(this) }>&nbsp;[X]</span>
-      </li>
+      <tr>
+        <td><a href={url}>{this.props.name}</a></td>
+        <td><i className="material-icons pointer" onClick={ this.deleteRoom.bind(this) }>close</i></td>
+      </tr>
     )
   }
 }

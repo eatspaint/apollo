@@ -89,7 +89,7 @@ class RoomContainer extends React.Component{
             <tr key={key}>
               <td>{ track.name }</td>
               <td>{ track.artists[0].name }</td>
-              <td className='pointer' onClick={this.removeSong.bind(this, track.id)}>&nbsp;[X]</td>
+              <td ><i className="material-icons pointer" onClick={this.removeSong.bind(this, track.id)}>close</i></td>
             </tr>
           )
         }
@@ -100,17 +100,19 @@ class RoomContainer extends React.Component{
           <div>
             <p>Current Playlist: {this.state.playlist.name}</p>
             <iframe src={ player } width="300" height="80" frameBorder="0" allowTransparency="true"></iframe>
-            <table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Artist</th>
-                </tr>
-              </thead>
-              <tbody>
-                { tracks }
-              </tbody>
-            </table>
+            <div className='scroll-table'>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Artist</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  { tracks }
+                </tbody>
+              </table>
+            </div>
           </div>
         )
       } else {
@@ -120,18 +122,20 @@ class RoomContainer extends React.Component{
             <iframe src={ player } width="300" height="80" frameBorder="0" allowTransparency="true"></iframe>
             <br />
             <a className='pointer' onClick={this.removePlaylist}>Change Playlist</a>
+            <div className='scroll-table'>
               <table>
                 <thead>
                   <tr>
                     <th>Name</th>
                     <th>Artist</th>
                     <th>Delete</th>
-                  </tr>  
+                  </tr>
                 </thead>
                 <tbody>
                   { tracks }
                 </tbody>
               </table>
+            </div>  
           </div>
         )
       }
