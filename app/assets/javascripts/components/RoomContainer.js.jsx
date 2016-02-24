@@ -95,7 +95,7 @@ class RoomContainer extends React.Component{
         }
       })
       let player = "https://embed.spotify.com/?uri=" + this.state.playlist.uri;
-      if(this.props.guest || (this.props.user.id != this.props.room.user_id)){
+      if(this.props.guest || ((this.props.user.id != this.props.room.user_id) && (this.state.playlist.owner.id != this.props.user.rspot.id))){
         return(
           <div>
             <p>Current Playlist: {this.state.playlist.name}</p>
@@ -135,7 +135,7 @@ class RoomContainer extends React.Component{
                   { tracks }
                 </tbody>
               </table>
-            </div>  
+            </div>
           </div>
         )
       }
@@ -157,23 +157,30 @@ class RoomContainer extends React.Component{
     }
   }
   updateCheck(){
-    check_against = this.state.playlist;
+    if(this.state.hasPlaylist){
+      check_against = this.state.playlist.total;
+      playlist_id = this.state.playlist.id;
+    } else {
+      check_against = 0;
+      playlist_id = 0;
+    }
     self = this;
     $.ajax({
-      url: '/playlist',
+      url: '/playlist_check',
       type: 'GET',
-      data: { user: this.props.user.id, playlist: this.state.playlist.id, room_id: this.props.room.id }
+      data: { room_id: this.props.room.id }
     }).success( data => {
-      if(data.total != check_against.total){
+      if(data.exit_message){
+        console.log('room no longer has playlist')
+        self.setState({ playlist: null, hasPlaylist: false})
+      } else if((data.total != check_against) || (data.id != playlist_id)){
         console.log('playlist has changed');
-        self.setState({ playlist: data });
+        self.setState({ playlist: data, hasPlaylist: true });
       }
-    })
+    });
   }
   render(){
-    if(this.state.hasPlaylist){
-      setInterval(this.updateCheck, 5000);
-    }
+    setTimeout(setInterval(this.updateCheck, 5000), 5000);
     return(
       <div className='row'>
         <div className='col s12'>

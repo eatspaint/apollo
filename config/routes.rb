@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/playlists/search', to: 'playlists#search'
   get '/songs/search', to: 'playlists#song_search'
   get '/find_room', to: 'rooms#find_room'
+  get '/playlist_check', to: 'playlists#check'
 
   put '/playlist', to: 'playlists#add_track'
   put '/remove_track', to: 'playlists#remove_track'

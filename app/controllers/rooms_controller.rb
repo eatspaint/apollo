@@ -13,10 +13,15 @@ class RoomsController < ApplicationController
       user = RSpotify::User.new(current_user.rspot)
       @playlists = user.playlists(limit: 50)
       if @room.playlists.any?
-        @playlist = RSpotify::Playlist.find(@owner.id, @room.playlists.first.rspot_id)
+        @playlist = RSpotify::Playlist.find(@room.playlists.first.user_id, @room.playlists.first.rspot_id)
       end
     else
-      @playlist = RSpotify::Playlist.find(@owner.id, @room.playlists.first.rspot_id)
+      if @room.playlists.any?
+        @playlist = RSpotify::Playlist.find(@room.playlists.first.user_id, @room.playlists.first.rspot_id)
+      else
+        flash[:error] = 'Nobody is currently in that room.'
+        redirect_to '/'
+      end
     end
   end
 

@@ -14,6 +14,18 @@ class PlaylistsController < ApplicationController
     end
   end
 
+  def check
+    room = Room.find(params[:room_id])
+    if room.playlists.any?
+      user_id = Room.find(params[:room_id]).playlists.first.user_id
+      playlist_id = Room.find(params[:room_id]).playlists.first.rspot_id
+      @playlist = RSpotify::Playlist.find(user_id, playlist_id)
+      render json: @playlist
+    else
+      render json: { exit_message: 'exit' }
+    end
+  end
+
   def create
     user = RSpotify::User.new(current_user.rspot)
     playlist = user.create_playlist!(params[:playlist_name])
