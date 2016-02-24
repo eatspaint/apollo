@@ -176,11 +176,13 @@ class RoomContainer extends React.Component{
       } else if((data.total != check_against) || (data.id != playlist_id)){
         console.log('playlist has changed');
         self.setState({ playlist: data, hasPlaylist: true });
+      } else {
+        setTimeout(this.updateCheck, 5000);
       }
     });
   }
   render(){
-    setTimeout(setInterval(this.updateCheck, 5000), 5000);
+    setTimeout(this.updateCheck, 5000);
     return(
       <div className='row'>
         <div className='col s12'>
