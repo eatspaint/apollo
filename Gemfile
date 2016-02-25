@@ -38,6 +38,8 @@ gem 'react-rails'
 
 gem 'rails_12factor'
 
+gem 'newrelic_rpm'
+
 group :production do
   gem 'puma'
 end
