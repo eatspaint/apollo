@@ -5,6 +5,9 @@ gem 'haml-rails'
 gem 'materialize-sass'
 gem 'devise'
 
+# obfuscate ids for harder room jumping
+gem 'hashids'
+
 # add more ruby spotify commands
 gem 'rspotify'
 

@@ -7,9 +7,9 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find(params[:id])
+    @room = Room.find(Hashids.new('lol', 8).decode(params[:id]).first)
     @owner = RSpotify::User.new(@room.user.rspot)
-    if current_user
+    if current_user && current_user.rspot != {}
       user = RSpotify::User.new(current_user.rspot)
       @playlists = user.playlists(limit: 50)
       if @room.playlists.any?
@@ -28,7 +28,7 @@ class RoomsController < ApplicationController
   def find_room
     room = Room.find_by(name: params[:room_name])
     if room
-      render json: room
+      render json: {room: room, salt: Hashids.new('lol', 8).encode(room.id)}
     else
       flash[:error] = 'A room with that name could not be found. (Rooms are case sensitive.)'
       render json: {error: flash}

@@ -1,5 +1,5 @@
 <div class='row'>
-  <div class='col s12'>
+  <div class='col s12 m6 offset-m2'>
     <div class='panel'>
       <div class='panel-head'>
         <h3>Edit <%= resource_name.to_s.humanize %></h3>
@@ -53,6 +53,21 @@
         <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), class: 'flat-btn', data: { confirm: "Are you sure?" }, method: :delete %></p>
 
         <%= link_to "Back", :back %>
+      </div>
+    </div>
+  </div>
+  <div class='col s12 m2'>
+    <div class='panel'>
+      <div class='panel-head'>
+        <h3>Spotify</h3>
+      </div>
+      <div class='panel-body'>
+        <%- if resource.rspot != {} %>
+          <p>Currently signed into Spotify as: <%= resource.rspot['display_name'] %> (<%= resource.rspot['email'] %>)</p>
+          <%= button_to "Unlink Account", remove_spotify_path(resource.id), class: 'flat-btn', method: :delete %>
+        <%- else %>
+          <%= button_to "Link with Spotify", '/auth/spotify', class: 'flat-btn' %>
+        <%- end %>  
       </div>
     </div>
   </div>

@@ -14,7 +14,7 @@ class FindRoom extends React.Component{
       if(data.error){
         window.location.href = route;
       } else {
-        window.location.href = '/rooms/' + data.id;
+        window.location.href = '/rooms/' + data.salt;
       }
     });
   }

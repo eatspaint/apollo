@@ -12,7 +12,7 @@ class Room extends React.Component{
     })
   }
   render(){
-    let url = `/rooms/${this.props.id}`;
+    let url = `/rooms/${this.props.salt}`;
     return(
       <tr>
         <td><a href={url}>{this.props.name}</a></td>

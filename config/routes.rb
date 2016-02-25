@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   post '/playlists', to: 'playlists#create'
 
   delete '/remove_playlist', to: 'rooms#remove_playlist'
+  delete '/remove_spotify', to: 'users#remove_spotify'
 
   resources :rooms
 
