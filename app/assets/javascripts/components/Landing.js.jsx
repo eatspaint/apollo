@@ -35,15 +35,15 @@ class Landing extends React.Component{
                 <p>Apollo lets everyone play DJ. Getting apollo up and running is easy:</p>
                 <dl>
                   <dt><b className='apollo-pink'>1. Sign Up</b></dt>
-                  <dd>Somebody needs to set up an account. Apollo only needs one user work in your space. Go to "Sign Up", enter your information, and allow Apollo access to your Spotify account. More users = More options.</dd>
+                  <dd>Somebody needs to set up an account. Apollo only needs one user to work in your space. Go to "Sign Up", enter your information, and allow Apollo access to your Spotify account. More users = More options.</dd>
                   <dt><b className='apollo-pink'>2. Get a Room</b></dt>
-                  <dd>Now that you have an account. Go to "Rooms" and choose a room, or make a new one if you don't have any yet.</dd>
+                  <dd>Now that you have an account. Go to "Rooms" and choose a room, or make a new one if you don't have any yet. Room names must be unique, so be creative!</dd>
                   <dt><b className='apollo-pink'>3. Pick a Playlist</b></dt>
                   <dd>Once inside a room, choose a playlist that you own (Apollo won't work with a playlist that you can't modify) <br /> -OR- <br />Type in a name under "Create a Playlist" to start from scratch.</dd>
                   <dt><b className='apollo-pink'>4. Add Your Favorite Songs</b></dt>
                   <dd>Now that your room has a playlist, anybody can add songs. All that they'll need to do is to visit Apollo and enter your room name to join.</dd>
                   <dt><b className='apollo-pink'>5. Press Play</b></dt>
-                  <dd>At any time, clicking the play button on the Spotify playlist shown in the room will launch Spotify on your computer and begin playing that playlist from your room.</dd>
+                  <dd>At any time, clicking the play button on the Spotify playlist shown in the room will launch Spotify on your computer and begin playing the room's current playlist.</dd>
                 </dl>
               </div>
             </div>

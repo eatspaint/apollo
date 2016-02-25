@@ -64,10 +64,11 @@
       <div class='panel-body'>
         <%- if resource.rspot != {} %>
           <p>Currently signed into Spotify as: <%= resource.rspot['display_name'] %> (<%= resource.rspot['email'] %>)</p>
-          <%= button_to "Unlink Account", remove_spotify_path(resource.id), class: 'flat-btn', method: :delete %>
+          <%= button_to "Unlink Spotify", remove_spotify_path(resource.id), class: 'flat-btn', method: :delete %>
         <%- else %>
+          <p>Link your Spotify account to unlock the full functionality of Apollo.</p>
           <%= button_to "Link with Spotify", '/auth/spotify', class: 'flat-btn' %>
-        <%- end %>  
+        <%- end %>
       </div>
     </div>
   </div>
