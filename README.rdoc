@@ -2,8 +2,8 @@
 
 Apollo is a project I put together to work with Oauth/Spotify, React, and Ruby on Rails. The concept will allow a user to create a 'room' which can be accessed by others who visit the site. Guests to the room will be able to view the current playlist of the room, add songs from their own Spotify playlists, favorite songs from the room, and interact with the music currently playing in their room.
 
-* Built with Ruby 2.2.2, on Rails 4.2.4
-
 * Requires spotify.yml, see spotify.yml.example for format
 
-* Currently in pre-alpha, do not expect expected behavior from this app
+* Currently in development, if you find a bug, report it!
+
+* Visit https://apolloapollo.io to see the app in action.
