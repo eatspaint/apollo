@@ -18,7 +18,7 @@ class RoomContainer extends React.Component{
       data: { user: this.props.user.id, playlist: id, room_id: this.props.room.id }
     }).success( data => {
       if(data.error){
-        window.location.href = '/rooms/' + this.props.room.id;
+        window.location.href = '/rooms/' + this.props.room_salt;
       }else{
         this.setState({ playlist: data, hasPlaylist: true});
       }

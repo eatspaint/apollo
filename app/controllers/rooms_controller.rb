@@ -9,6 +9,7 @@ class RoomsController < ApplicationController
   def show
     @room = Room.find(Hashids.new('lol', 8).decode(params[:id]).first)
     @owner = RSpotify::User.new(@room.user.rspot)
+    @room_salt = params[:id]
     if current_user && current_user.rspot != {}
       user = RSpotify::User.new(current_user.rspot)
       @playlists = user.playlists(limit: 50)
