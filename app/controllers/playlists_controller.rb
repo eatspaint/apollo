@@ -44,19 +44,17 @@ class PlaylistsController < ApplicationController
 
   def add_track
     track = RSpotify::Track.find(params[:song_id])
-    owner = Room.find(params[:room][:id]).user
-    owner_rspot = RSpotify::User.new(owner.rspot)
-    playlist = RSpotify::Playlist.find(owner_rspot.id, params[:playlist][:id])
+    user_id = Room.find(params[:room][:id]).playlists.first.user_id
+    playlist = RSpotify::Playlist.find(user_id, params[:playlist][:id])
     playlist.add_tracks!([track])
     render json: playlist
   end
 
   def remove_track
     track = RSpotify::Track.find(params[:track_id])
-    owner = Room.find(params[:room][:id]).user
-    owner_rspot = RSpotify::User.new(owner.rspot)
-    playlist = RSpotify::Playlist.find(owner_rspot.id, params[:playlist][:id])
-    playlist.remove_tracks!([track])
+    user_id = Room.find(params[:room][:id]).playlists.first.user_id
+    playlist = RSpotify::Playlist.find(user_id, params[:playlist][:id])
+    playlist.remove_tracks!([{track: track, positions: [params[:position].to_i]}])
     render json: playlist
   end
 

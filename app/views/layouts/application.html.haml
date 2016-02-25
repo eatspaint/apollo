@@ -7,9 +7,12 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
     %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
+    %link{:href => "https://fonts.googleapis.com/css?family=Open+Sans:400,700", :rel => "stylesheet", :type => "text/css"}/
   %body
-    = render 'layouts/navbar'
-    - flash.each do |flash|
-      %script
-        Materialize.toast("#{flash[1]}", 4000);
-    = yield
+    .page-wrap
+      = render 'layouts/navbar'
+      - flash.each do |flash|
+        %script
+          Materialize.toast("#{flash[1]}", 4000);
+      = yield
+    = render 'layouts/footer'

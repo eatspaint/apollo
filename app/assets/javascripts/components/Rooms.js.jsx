@@ -51,7 +51,7 @@ class Rooms extends React.Component{
   render(){
     return(
       <div className='row'>
-        <div className='col s6'>
+        <div className='col s12 m6 l4'>
           <div className='panel'>
             <div className='panel-head'>
               <h3 className=''>Your Rooms</h3>
@@ -61,7 +61,7 @@ class Rooms extends React.Component{
             </div>
           </div>
         </div>
-        <div className='col s6'>
+        <div className='col s12 m6 l4'>
           <div className='panel'>
             <div className='panel-head'>
               <h3 className=''>Create a Room</h3>
@@ -70,10 +70,13 @@ class Rooms extends React.Component{
               <p>Setting up a room allows other users to connect with your playlists.</p>
               <form onSubmit={this.newRoom}>
                 <input ref='room_name'></input>
-                <button className='btn'>Create</button>
+                <button className='flat-btn'>Create</button>
               </form>
             </div>
           </div>
+        </div>
+        <div className='col s12 m6 l4 offset-m3'>
+          <FindRoom here='/rooms'/>
         </div>
       </div>
     )

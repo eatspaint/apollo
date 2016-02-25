@@ -16,7 +16,7 @@ class Room extends React.Component{
     return(
       <tr>
         <td><a href={url}>{this.props.name}</a></td>
-        <td><i className="material-icons pointer" onClick={ this.deleteRoom.bind(this) }>close</i></td>
+        <td><i className="material-icons pointer delete-x" onClick={ this.deleteRoom.bind(this) }>close</i></td>
       </tr>
     )
   }

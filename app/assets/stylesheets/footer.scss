@@ -1,0 +1,20 @@
+footer {
+  background-color: #181818;
+  border-top: 1px solid #CB1C75;
+  font-family: 'Nord Regular';
+}
+.page-wrap {
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -50px;
+}
+.page-wrap:after {
+  content: "";
+  display: block;
+}
+footer, .page-wrap:after {
+  height: 50px;
+}
+.material-icons.play {
+  font-size: 1em;
+}

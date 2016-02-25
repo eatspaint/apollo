@@ -23,7 +23,7 @@ class NewPlaylist extends React.Component{
           <p>Build a new playlist to start from scratch.</p>
           <form onSubmit={this.newPlaylist}>
             <input ref='playlist_name'></input>
-            <button className='btn'>Create</button>
+            <button className='flat-btn'>Create</button>
           </form>
         </div>
       </div>

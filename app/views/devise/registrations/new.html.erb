@@ -1,8 +1,8 @@
 <div class='row'>
-  <div class='col s12'>
+  <div class='col s12 m6 offset-m3'>
     <div class='panel'>
       <div class='panel-head'>
-        <h2>Sign up</h2>
+        <h3>Sign up</h3>
       </div>
       <div class='panel-body'>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -35,10 +35,11 @@
             <%= f.label :password_confirmation %><br />
             <%= f.password_field :password_confirmation, autocomplete: "off" %>
           </div>
-
+          <br />
           <div class="actions">
-            <%= f.submit "Sign up" %>
+            <%= f.submit "Sign up", class: 'flat-btn' %>
           </div>
+          <br />
         <% end %>
 
         <%= render "devise/shared/links" %>

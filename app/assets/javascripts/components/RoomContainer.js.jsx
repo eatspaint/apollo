@@ -47,11 +47,11 @@ class RoomContainer extends React.Component{
       }
     })
   }
-  removeSong(track_id){
+  removeSong(track_id, i){
     $.ajax({
       url: '/remove_track',
       type: 'PUT',
-      data: { track_id: track_id, room: this.props.room, playlist: this.state.playlist }
+      data: { track_id: track_id, room: this.props.room, playlist: this.state.playlist, position: i }
     }).success( data => {
       this.setState({ playlist: data });
     })
@@ -68,20 +68,21 @@ class RoomContainer extends React.Component{
       });
       return(
         <div className='row'>
-          <p>Please add a playlist or create a new one!</p>
+          <p>Add a playlist or create a new one!</p>
           <ul>
             { playlists }
           </ul>
         </div>
       )
     } else {
-      let tracks = this.state.playlist.tracks_cache.map( track => {
-        let key = `track-${track.id}`;
-        if(this.props.guest || (this.props.user.id != this.props.room.user_id)){
+      let tracks = this.state.playlist.tracks_cache.map( (track, i) => {
+        let key = `track-${track.id}-${i}`;
+        if(this.props.guest || ((this.props.user.id != this.props.room.user_id) && (this.state.playlist.owner.id != this.props.user.rspot.id))){
           return(
             <tr key={key}>
               <td>{ track.name }</td>
               <td>{ track.artists[0].name }</td>
+              <td>{ track.album.name }</td>
             </tr>
           )
         } else {
@@ -89,7 +90,8 @@ class RoomContainer extends React.Component{
             <tr key={key}>
               <td>{ track.name }</td>
               <td>{ track.artists[0].name }</td>
-              <td ><i className="material-icons pointer" onClick={this.removeSong.bind(this, track.id)}>close</i></td>
+              <td>{ track.album.name }</td>
+              <td ><i className="material-icons pointer delete-x" onClick={this.removeSong.bind(this, track.id, i)}>close</i></td>
             </tr>
           )
         }
@@ -99,13 +101,16 @@ class RoomContainer extends React.Component{
         return(
           <div>
             <p>Current Playlist: {this.state.playlist.name}</p>
-            <iframe src={ player } width="300" height="80" frameBorder="0" allowTransparency="true"></iframe>
+            <div className='row'>
+              <iframe src={ player } width="100%" height="80" frameBorder="0" allowTransparency="true"></iframe>
+            </div>
             <div className='scroll-table'>
               <table>
                 <thead>
                   <tr>
                     <th>Name</th>
                     <th>Artist</th>
+                    <th>Album</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -119,15 +124,25 @@ class RoomContainer extends React.Component{
         return(
           <div>
             <p>Current Playlist: {this.state.playlist.name}</p>
-            <iframe src={ player } width="300" height="80" frameBorder="0" allowTransparency="true"></iframe>
-            <br />
-            <a className='pointer' onClick={this.removePlaylist}>Change Playlist</a>
+            <div className='row'>
+              <div className='col s12 valign-wrapper'>
+                <div className='col s12 m10'>
+                  <iframe src={ player } width="100%" height="80" frameBorder="0" allowTransparency="true"></iframe>
+                </div>
+                <div className='col s12 m2'>
+                  <div className='valign'>
+                    <a className='pointer flat-btn' onClick={this.removePlaylist}>Remove</a>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className='scroll-table'>
               <table>
                 <thead>
                   <tr>
                     <th>Name</th>
                     <th>Artist</th>
+                    <th>Album</th>
                     <th>Delete</th>
                   </tr>
                 </thead>
@@ -171,10 +186,10 @@ class RoomContainer extends React.Component{
       data: { room_id: this.props.room.id }
     }).success( data => {
       if(data.exit_message){
-        console.log('room no longer has playlist')
+        // console.log('room no longer has playlist')
         self.setState({ playlist: null, hasPlaylist: false})
       } else if((data.total != check_against) || (data.id != playlist_id)){
-        console.log('playlist has changed');
+        // console.log('playlist has changed');
         self.setState({ playlist: data, hasPlaylist: true });
       } else {
         setTimeout(this.updateCheck, 5000);
