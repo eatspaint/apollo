@@ -36,8 +36,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Add React gem for low-page reloads
 gem 'react-rails'
 
+gem 'rails_12factor'
+
 group :production do
-  gem 'rails_12factor'
   gem 'puma'
 end
 
