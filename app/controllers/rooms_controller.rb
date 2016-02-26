@@ -45,15 +45,20 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = current_user.rooms.create(room_params)
-    if @room.save
-      head :ok
-    else
-      messages = []
-      @room.errors.messages.each do |name, message|
-        flash[:validation] = message[0]
+    if params[:room][:name].strip != ''
+      @room = current_user.rooms.create(room_params)
+      if @room.save
+        head :ok
+      else
+        messages = []
+        @room.errors.messages.each do |name, message|
+          flash[:validation] = message[0]
+        end
+        render json: {error: messages}
       end
-      render json: {error: messages}
+    else
+      flash[:error] = "Room name can't be blank."
+      render json: {error: 'error'}
     end
   end
 

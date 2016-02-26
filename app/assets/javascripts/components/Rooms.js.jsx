@@ -67,7 +67,7 @@ class Rooms extends React.Component{
               <h3 className=''>Create a Room</h3>
             </div>
             <div className='panel-body'>
-              <p>Setting up a room allows other users to connect with your playlists.</p>
+              <p>Setting up a room allows other users to connect with your playlists. Just give the room name to anyone you want to join.</p>
               <form onSubmit={this.newRoom}>
                 <input ref='room_name'></input>
                 <button className='flat-btn'>Create</button>
