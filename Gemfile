@@ -51,6 +51,7 @@ group :development, :test do
   gem 'awesome_print'
   gem 'railroady'
   gem 'rubocop'
+  gem 'jazz_fingers'
 end
 
 group :development do
