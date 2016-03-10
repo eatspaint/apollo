@@ -50,6 +50,7 @@ group :development, :test do
   gem 'byebug'
   gem 'awesome_print'
   gem 'railroady'
+  gem 'rubocop'
 end
 
 group :development do
