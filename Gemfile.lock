@@ -30,6 +30,11 @@ GEM
       activemodel (= 4.2.5)
       activesupport (= 4.2.5)
       arel (~> 6.0)
+    activerecord-jdbc-adapter (1.3.20)
+      activerecord (>= 2.2)
+    activerecord-jdbcpostgresql-adapter (1.3.20)
+      activerecord-jdbc-adapter (~> 1.3.20)
+      jdbc-postgres (>= 9.1)
     activesupport (4.2.5)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
@@ -44,12 +49,8 @@ GEM
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
     bcrypt (3.1.11)
-    binding_of_caller (0.7.2)
-      debug_inspector (>= 0.0.1)
+    bcrypt (3.1.11-java)
     builder (3.2.2)
-    byebug (2.7.0)
-      columnize (~> 0.3)
-      debugger-linecache (~> 1.2)
     coderay (1.1.1)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
@@ -58,14 +59,9 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.10.0)
-    columnize (0.9.0)
     concurrent-ruby (1.0.1)
+    concurrent-ruby (1.0.1-java)
     connection_pool (2.2.0)
-    coolline (0.5.0)
-      unicode_utils (~> 1.4)
-    daemons (1.2.3)
-    debug_inspector (0.0.2)
-    debugger-linecache (1.2.0)
     devise (3.5.6)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -76,10 +72,10 @@ GEM
     domain_name (0.5.20160310)
       unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
-    eventmachine (1.2.0.1)
     execjs (2.6.0)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
+    ffi (1.9.10-java)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     haml (4.0.7)
@@ -92,7 +88,6 @@ GEM
       railties (>= 4.0.1)
     hashids (1.0.2)
     hashie (3.4.3)
-    hirb (0.7.3)
     html2haml (2.0.0)
       erubis (~> 2.7.0)
       haml (~> 4.0.0)
@@ -101,22 +96,16 @@ GEM
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     i18n (0.7.0)
-    jazz_fingers (3.0.2)
-      awesome_print (~> 1.6)
-      hirb (~> 0.7)
-      pry (~> 0.10)
-      pry-byebug (= 1.3.3)
-      pry-coolline (~> 0.2)
-      pry-doc (~> 0.6)
-      pry-remote (>= 0.1.7)
     jbuilder (2.4.1)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
+    jdbc-postgres (9.4.1206)
     jquery-rails (4.1.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.3)
+    json (1.8.3-java)
     jwt (1.5.1)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -135,6 +124,7 @@ GEM
     newrelic_rpm (3.15.1.316)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    nokogiri (1.6.7.2-java)
     oauth2 (1.1.0)
       faraday (>= 0.8, < 0.10)
       jwt (~> 1.0, < 1.5.2)
@@ -150,24 +140,18 @@ GEM
     orm_adapter (0.5.0)
     parser (2.3.0.7)
       ast (~> 2.2)
-    pg (0.18.4)
     powerpack (0.1.1)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-byebug (1.3.3)
-      byebug (~> 2.7)
-      pry (~> 0.10)
-    pry-coolline (0.2.5)
-      coolline (~> 0.5)
-    pry-doc (0.8.0)
-      pry (~> 0.9)
-      yard (~> 0.8)
-    pry-remote (0.1.8)
-      pry (~> 0.9)
-      slop (~> 3.0)
+    pry (0.10.3-java)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+      spoon (~> 0.0)
     puma (3.3.0)
+    puma (3.3.0-java)
     rack (1.6.4)
     rack-mini-profiler (0.9.9.2)
       rack (>= 1.2.0)
@@ -244,6 +228,8 @@ GEM
       rdoc (~> 4.0)
     sexp_processor (4.7.0)
     slop (3.6.0)
+    spoon (0.0.4)
+      ffi
     spring (1.6.4)
     sprockets (3.6.0)
       concurrent-ruby (~> 1.0)
@@ -252,12 +238,9 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    thin (1.6.4)
-      daemons (~> 1.0, >= 1.0.9)
-      eventmachine (~> 1.0, >= 1.0.4)
-      rack (~> 1.0)
     thor (0.19.1)
     thread_safe (0.3.5)
+    thread_safe (0.3.5-java)
     tilt (2.0.2)
     turbolinks (2.5.3)
       coffee-rails
@@ -267,34 +250,27 @@ GEM
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
+    unf (0.1.4-java)
     unf_ext (0.0.7.2)
     unicode-display_width (1.0.3)
-    unicode_utils (1.4.0)
     warden (1.2.6)
       rack (>= 1.0)
-    web-console (2.3.0)
-      activemodel (>= 4.0)
-      binding_of_caller (>= 0.7.2)
-      railties (>= 4.0)
-      sprockets-rails (>= 2.0, < 4.0)
-    yard (0.8.7.6)
 
 PLATFORMS
+  java
   ruby
 
 DEPENDENCIES
+  activerecord-jdbcpostgresql-adapter
   awesome_print
-  byebug
   coffee-rails (~> 4.1.0)
   devise
   haml-rails
   hashids
-  jazz_fingers
   jbuilder (~> 2.0)
   jquery-rails
   materialize-sass
   newrelic_rpm
-  pg
   pry
   puma
   rack-mini-profiler
@@ -307,10 +283,8 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
-  thin
   turbolinks
   uglifier (>= 1.3.0)
-  web-console (~> 2.0)
 
 BUNDLED WITH
    1.11.2
