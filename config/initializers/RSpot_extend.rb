@@ -4,7 +4,6 @@ end
 
 module Tracks
   def all_tracks!
-    # binding.pry
     length = self.total
     @all_tracks = []
     offset = 0
