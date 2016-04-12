@@ -5,8 +5,8 @@ end
 module Tracks
   def all_tracks!
     length = self.total
-    @all_tracks = []
-    offset = 0
+    @all_tracks = self.tracks_cache
+    offset = 100
     while @all_tracks.length != length
       @all_tracks += self.tracks(offset: offset)
       offset += 100
