@@ -18,8 +18,9 @@ class PlaylistsController < ApplicationController
   def check
     room = Room.find(params[:room_id])
     if room.playlists.any?
-      user_id = Room.find(params[:room_id]).playlists.first.user_id
-      playlist_id = Room.find(params[:room_id]).playlists.first.rspot_id
+      room_playlist = room.playlists.first
+      user_id = room_playlist.user_id
+      playlist_id = room_playlist.rspot_id
       @playlist = RSpotify::Playlist.find(user_id, playlist_id)
       @playlist.all_tracks!
       render json: @playlist
