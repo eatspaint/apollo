@@ -25,7 +25,12 @@ class PlaylistsController < ApplicationController
       @playlist.all_tracks!
       render json: @playlist
     else
-      render json: { exit_message: 'exit' }
+      if current_user && current_user.rspot != {}
+        render json: { exit_message: 'exit' }
+      else
+        flash[:error] = 'Nobody is currently in that room.'
+        render json: { exit_message: 'guest_exit'}
+      end
     end
   end
 

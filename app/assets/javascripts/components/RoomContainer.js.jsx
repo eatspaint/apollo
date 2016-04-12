@@ -186,8 +186,11 @@ class RoomContainer extends React.Component{
       data: { room_id: this.props.room.id }
     }).success( data => {
       if(data.exit_message){
-        // console.log('room no longer has playlist')
-        self.setState({ playlist: null, hasPlaylist: false})
+        if(data.exit_message == 'exit'){
+          self.setState({ playlist: null, hasPlaylist: false});
+        }else if(data.exit_message == 'guest_exit'){
+          window.location.href = '/';
+        }
       } else if((data.total != check_against) || (data.id != playlist_id)){
         // console.log('playlist has changed');
         self.setState({ playlist: data, hasPlaylist: true });

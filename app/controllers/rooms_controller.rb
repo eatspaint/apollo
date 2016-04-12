@@ -8,20 +8,18 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(Hashids.new('lol', 8).decode(params[:id]).first)
+    if @room.playlists.any?
+      room_playlist = @room.playlists.first
+      @playlist = RSpotify::Playlist.find(room_playlist.user_id, room_playlist.rspot_id)
+      @playlist.all_tracks!
+    end
     @owner = RSpotify::User.new(@room.user.rspot)
     @room_salt = params[:id]
     if current_user && current_user.rspot != {}
-      user = RSpotify::User.new(current_user.rspot)
+      user = @owner.id == current_user.rspot['id'] ? @owner : RSpotify::User.new(current_user.rspot)
       @playlists = user.playlists(limit: 50)
-      if @room.playlists.any?
-        @playlist = RSpotify::Playlist.find(@room.playlists.first.user_id, @room.playlists.first.rspot_id)
-        @playlist.all_tracks!
-      end
     else
-      if @room.playlists.any?
-        @playlist = RSpotify::Playlist.find(@room.playlists.first.user_id, @room.playlists.first.rspot_id)
-        @playlist.all_tracks!
-      else
+      unless room_playlist
         flash[:error] = 'Nobody is currently in that room.'
         redirect_to '/'
       end
