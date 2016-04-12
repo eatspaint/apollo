@@ -15,10 +15,12 @@ class RoomsController < ApplicationController
       @playlists = user.playlists(limit: 50)
       if @room.playlists.any?
         @playlist = RSpotify::Playlist.find(@room.playlists.first.user_id, @room.playlists.first.rspot_id)
+        @playlist.all_tracks!
       end
     else
       if @room.playlists.any?
         @playlist = RSpotify::Playlist.find(@room.playlists.first.user_id, @room.playlists.first.rspot_id)
+        @playlist.all_tracks!
       else
         flash[:error] = 'Nobody is currently in that room.'
         redirect_to '/'

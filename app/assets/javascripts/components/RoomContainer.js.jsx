@@ -75,7 +75,7 @@ class RoomContainer extends React.Component{
         </div>
       )
     } else {
-      let tracks = this.state.playlist.tracks_cache.map( (track, i) => {
+      let tracks = this.state.playlist.all_tracks.map( (track, i) => {
         let key = `track-${track.id}-${i}`;
         if(this.props.guest || ((this.props.user.id != this.props.room.user_id) && (this.state.playlist.owner.id != this.props.user.rspot.id))){
           return(
