@@ -8,9 +8,8 @@ class RoomsController < ApplicationController
 
   def show
     @room = Room.find(Hashids.new('lol', 8).decode(params[:id]).first)
-    if @room.playlists.any?
-      room_playlist = @room.playlists.first
-      @playlist = RSpotify::Playlist.find(room_playlist.user_id, room_playlist.rspot_id)
+    if room_playlist = @room.playlist
+      @playlist = RSpotify::Playlist.find(room_playlist.rspot_user_id, room_playlist.rspot_id)
       @playlist.all_tracks!
     end
     @owner = RSpotify::User.new(@room.user.rspot)
@@ -71,7 +70,7 @@ class RoomsController < ApplicationController
   end
 
   def remove_playlist
-    Room.find(params[:room_id]).playlists.destroy_all
+    Room.find(params[:room_id]).playlist.destroy
     head :ok
   end
 

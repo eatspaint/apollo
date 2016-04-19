@@ -1,13 +1,12 @@
 class Room < ActiveRecord::Base
   belongs_to :user
-  has_many :jukeboxes
-  has_many :playlists, through: :jukeboxes
+  has_one :playlist, inverse_of: :room
   validates :name, uniqueness: { message: "That room name is already taken" }
 
   def self.wherearewe
     playing, empty = [], []
     Room.all.each do |room|
-      if room.playlists.any?
+      if room.playlist
         playing << "#{room.name}"
       else
         empty << "#{room.name}"

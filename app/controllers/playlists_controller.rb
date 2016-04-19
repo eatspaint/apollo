@@ -4,8 +4,8 @@ class PlaylistsController < ApplicationController
     begin
       @playlist = RSpotify::Playlist.find(user_id, params[:playlist])
       room = Room.find(params[:room_id])
-      unless room.playlists.any?
-        room.playlists.create({user_id: user_id, rspot_id: @playlist.id})
+      unless room.playlist
+        room.create_playlist({rspot_user_id: user_id, rspot_id: @playlist.id})
       end
       @playlist.all_tracks!
       render json: @playlist
@@ -17,9 +17,8 @@ class PlaylistsController < ApplicationController
 
   def check
     room = Room.find(params[:room_id])
-    if room.playlists.any?
-      room_playlist = room.playlists.first
-      user_id = room_playlist.user_id
+    if room_playlist = room.playlist
+      user_id = room_playlist.rspot_user_id
       playlist_id = room_playlist.rspot_id
       @playlist = RSpotify::Playlist.find(user_id, playlist_id)
       @playlist.all_tracks!
@@ -52,7 +51,7 @@ class PlaylistsController < ApplicationController
 
   def add_track
     track = RSpotify::Track.find(params[:song_id])
-    user_id = Room.find(params[:room][:id]).playlists.first.user_id
+    user_id = Room.find(params[:room][:id]).playlist.rspot_user_id
     playlist = RSpotify::Playlist.find(user_id, params[:playlist][:id])
     playlist.add_tracks!([track])
     playlist.all_tracks!
@@ -61,7 +60,7 @@ class PlaylistsController < ApplicationController
 
   def remove_track
     track = RSpotify::Track.find(params[:track_id])
-    user_id = Room.find(params[:room][:id]).playlists.first.user_id
+    user_id = Room.find(params[:room][:id]).playlist.rspot_user_id
     playlist = RSpotify::Playlist.find(user_id, params[:playlist][:id])
     playlist.remove_tracks!([{track: track, positions: [params[:position].to_i]}])
     playlist.all_tracks!
