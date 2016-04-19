@@ -11,12 +11,12 @@ class RemoveColumnsFromPlaylists < ActiveRecord::Migration
     add_reference :playlists, :room, index: true
 
     # remove need for jukeboxes, move room_id to playlist
-    Playlist.find_each do |playlist|
-      if room = playlist.rooms.first
-        playlist.room_id = room.id
-        playlist.save!
-      end
-    end
+    # Playlist.find_each do |playlist|
+    #   if room = playlist.rooms.first
+    #     playlist.room_id = room.id
+    #     playlist.save!
+    #   end
+    # end
 
     # remove jukeboxes table entirely
     drop_table :jukeboxes
