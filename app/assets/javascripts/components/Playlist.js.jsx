@@ -7,7 +7,7 @@ class Playlist extends React.Component{
     if(this.props.images[0]){
       return(this.props.images[0].url);
     } else {
-      return('/apollo_logo.png')
+      return('/assets/apollo_logo_large.png')
     }
   }
   render(){

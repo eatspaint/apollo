@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'apollo#landing'
-  get '/about', to: 'apollo#about'
+  get '/about', to: 'apollo#about', as: 'about'
   get '/auth/spotify/callback', to: 'users#spotify'
   get '/rooms_index', to: 'rooms#rooms_index'
   get '/playlist', to: 'playlists#show'

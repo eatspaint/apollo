@@ -30,8 +30,7 @@ class FindRoom extends React.Component{
               <div className=''>
                 <input ref='room_name'/>
               </div>
-              <br />
-              <div className=''>
+              <div className='center'>
                 <button className='flat-btn' type='submit'>Enter</button>
               </div>
             </div>
