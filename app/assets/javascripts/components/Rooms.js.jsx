@@ -58,6 +58,7 @@ class Rooms extends React.Component{
             </div>
             <div className='panel-body'>
               { this.rooms() }
+              <p><b>What is RRGuard?</b> RRGuard is a revolutionary technology that can be turned on in any of your favorite rooms in order to prevent guests in your room from adding the song "Never Gonna Give You Up" by Rick Astley. To see a demo of this feature in action, head over to our <a href='/rooms/rickroll'>RRGuard Test Room</a>.</p>
             </div>
           </div>
         </div>

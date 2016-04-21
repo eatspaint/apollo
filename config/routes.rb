@@ -8,9 +8,11 @@ Rails.application.routes.draw do
   get '/songs/search', to: 'playlists#song_search'
   get '/find_room', to: 'rooms#find_room'
   get '/playlist_check', to: 'playlists#check'
+  get '/rooms/rickroll', to: 'rooms#rickrolltest'
 
   put '/playlist', to: 'playlists#add_track'
   put '/remove_track', to: 'playlists#remove_track'
+  put '/rickroll', to: 'rooms#rickroll'
 
   post '/playlists', to: 'playlists#create'
 

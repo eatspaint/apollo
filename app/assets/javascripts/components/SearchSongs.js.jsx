@@ -8,7 +8,7 @@ class SearchSongs extends React.Component{
   }
   searchStart(){
     clearTimeout(this.searchTimeout);
-    this.searchTimeout = setTimeout(this.search, 750); //<- Time in ms to wait for use to stop typing
+    this.searchTimeout = setTimeout(this.search, 750); //<- Time in ms to wait for user to stop typing
   }
   search(){
     if(this.refs.song_query.value.length >= 3){

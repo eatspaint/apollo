@@ -39,8 +39,11 @@ class RoomContainer extends React.Component{
       type: 'PUT',
       data: { song_id: this.props.id, room: this.props.room, playlist: this.props.playlist }
     }).success( data => {
-      if(data.error){
-        window.location.href = '/rooms/' + this.props.room.id;
+      if(data.error == 'rickroll' && this.props.room.rickroll){
+        alert("Very funny.");
+        alert("Don't be that guy.");
+        alert("For real, stop.");
+        window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
       } else {
         // window.location.href = '/rooms/' + this.props.room.id;
         this.setState({ playlist: data });

@@ -3,16 +3,20 @@ class RoomsController < ApplicationController
   end
 
   def rooms_index
-    @rooms = Room.where(user_id: current_user)
+    @rooms = Room.where(user_id: current_user).sort
   end
 
   def show
     @room = Room.find(Hashids.new('lol', 8).decode(params[:id]).first)
-    if room_playlist = @room.playlist
+    render_room(@room)
+  end
+
+  def render_room(room)
+    if room_playlist = room.playlist
       @playlist = RSpotify::Playlist.find(room_playlist.rspot_user_id, room_playlist.rspot_id)
       @playlist.all_tracks!
     end
-    @owner = RSpotify::User.new(@room.user.rspot)
+    @owner = RSpotify::User.new(room.user.rspot)
     @room_salt = params[:id]
     if current_user && current_user.rspot != {}
       user = @owner.id == current_user.rspot['id'] ? @owner : RSpotify::User.new(current_user.rspot)
@@ -20,9 +24,10 @@ class RoomsController < ApplicationController
     else
       unless room_playlist
         flash[:error] = 'Nobody is currently in that room.'
-        redirect_to '/'
+        redirect_to '/' and return
       end
     end
+    render :show
   end
 
   def find_room
@@ -72,6 +77,17 @@ class RoomsController < ApplicationController
   def remove_playlist
     Room.find(params[:room_id]).playlist.destroy
     head :ok
+  end
+
+  def rickroll
+    room = Room.find(params[:room_id])
+    room.update(rickroll: !room.rickroll)
+    head :ok
+  end
+
+  def rickrolltest
+    @room = Room.find_by(name: 'RRGuard Test Room')
+    render_room(@room)
   end
 
   private

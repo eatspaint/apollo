@@ -51,11 +51,15 @@ class PlaylistsController < ApplicationController
 
   def add_track
     track = RSpotify::Track.find(params[:song_id])
-    user_id = Room.find(params[:room][:id]).playlist.rspot_user_id
-    playlist = RSpotify::Playlist.find(user_id, params[:playlist][:id])
-    playlist.add_tracks!([track])
-    playlist.all_tracks!
-    render json: playlist
+    if track.name == "Never Gonna Give You Up" && track.artists[0].name == "Rick Astley"
+      render json: {error: 'rickroll'}
+    else
+      user_id = Room.find(params[:room][:id]).playlist.rspot_user_id
+      playlist = RSpotify::Playlist.find(user_id, params[:playlist][:id])
+      playlist.add_tracks!([track])
+      playlist.all_tracks!
+      render json: playlist
+    end
   end
 
   def remove_track
