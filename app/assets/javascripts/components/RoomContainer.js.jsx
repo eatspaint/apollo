@@ -37,7 +37,7 @@ class RoomContainer extends React.Component{
     $.ajax({
       url: '/playlist',
       type: 'PUT',
-      data: { song_id: this.props.id, room: this.props.room.id, playlist: this.props.playlist.id }
+      data: { song_id: this.props.id, room_id: this.props.room.id, playlist_id: this.props.playlist.id }
     }).success( data => {
       if(data.error == 'rickroll' && this.props.room.rickroll){
         alert("Very funny.");
