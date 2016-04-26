@@ -54,8 +54,8 @@ class PlaylistsController < ApplicationController
     if track.name == "Never Gonna Give You Up" && track.artists[0].name == "Rick Astley"
       render json: {error: 'rickroll'}
     else
-      user_id = Room.find(params[:room][:id]).playlist.rspot_user_id
-      playlist = RSpotify::Playlist.find(user_id, params[:playlist][:id])
+      user_id = Room.find(params[:room_id]).playlist.rspot_user_id
+      playlist = RSpotify::Playlist.find(user_id, params[:playlist_id])
       playlist.add_tracks!([track])
       playlist.all_tracks!
       render json: playlist
