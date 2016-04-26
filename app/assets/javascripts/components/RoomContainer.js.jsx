@@ -54,7 +54,7 @@ class RoomContainer extends React.Component{
     $.ajax({
       url: '/remove_track',
       type: 'PUT',
-      data: { track_id: track_id, room: this.props.room, playlist: this.state.playlist, position: i }
+      data: { track_id: track_id, room_id: this.props.room.id, playlist_id: this.state.playlist.id, position: i }
     }).success( data => {
       this.setState({ playlist: data });
     })

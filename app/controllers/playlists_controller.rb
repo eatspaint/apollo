@@ -64,8 +64,8 @@ class PlaylistsController < ApplicationController
 
   def remove_track
     track = RSpotify::Track.find(params[:track_id])
-    user_id = Room.find(params[:room][:id]).playlist.rspot_user_id
-    playlist = RSpotify::Playlist.find(user_id, params[:playlist][:id])
+    user_id = Playlist.find_by(rspot_id: params[:playlist_id]).rspot_user_id
+    playlist = RSpotify::Playlist.find(user_id, params[:playlist_id])
     playlist.remove_tracks!([{track: track, positions: [params[:position].to_i]}])
     playlist.all_tracks!
     render json: playlist
