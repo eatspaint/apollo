@@ -27,6 +27,14 @@ class ApolloController < ApplicationController
     render json: {message: msg}
   end
 
+  def error
+    respond_to do |format|
+      format.html { render status: 404 }
+    end
+  rescue ActionController::UnknownFormat
+    render status: 404, text: "nope"
+  end
+
   private
 
   def fyf_lineup
