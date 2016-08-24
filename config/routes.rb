@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get '/playlist_check', to: 'playlists#check'
   get '/rooms/rickroll', to: 'rooms#rickrolltest'
 
+  get '/fyf', to: 'apollo#fyf'
+
   put '/playlist', to: 'playlists#add_track'
   put '/remove_track', to: 'playlists#remove_track'
   put '/rickroll', to: 'rooms#rickroll'

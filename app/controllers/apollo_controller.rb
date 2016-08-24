@@ -4,4 +4,7 @@ class ApolloController < ApplicationController
 
   def about
   end
+
+  def fyf
+  end
 end
