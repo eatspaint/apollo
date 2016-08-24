@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   get '/playlist_check', to: 'playlists#check'
   get '/rooms/rickroll', to: 'rooms#rickrolltest'
 
-  get '/fyf', to: 'apollo#fyf'
+  get '/fyf', to: 'apollo#fyf', as: 'fyf'
+  post '/fyf_top', to: 'apollo#find_top'
+  post '/fyf_save', to: 'apollo#save_playlist'
 
   put '/playlist', to: 'playlists#add_track'
   put '/remove_track', to: 'playlists#remove_track'

@@ -64,3 +64,25 @@ td {
 .copy {
   line-height: 2em;
 }
+
+.fyf-artist {
+  background-color: #666;
+  padding: 3px;
+  margin: 3px;
+  &:hover{
+    cursor: pointer;
+    text-shadow: 2px 2px #CB1C75;
+  }
+}
+.selected {
+  text-shadow: 2px 2px #CB1C75;
+}
+
+.flex-container {
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  -webkit-flex-wrap: wrap; /* Safari */
+  flex-wrap:         wrap;
+  -webkit-justify-content: space-around; /* Safari */
+  justify-content:         space-around;
+}
