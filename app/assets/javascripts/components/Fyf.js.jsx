@@ -72,7 +72,7 @@ class Fyf extends React.Component{
           <div className="col m6">
             <div className="panel">
               <div className="panel-head">
-                <h3>FYF 2016 Artists</h3>
+                <h3>FYF 2017 Artists</h3>
               </div>
               <div className="panel-body">
                 <div className="flex-container" style={{color: 'white'}}>{this.lineup()}</div>
